@@ -2,14 +2,14 @@ import React from 'react'
 import { currencyFormatter } from '../utils'
 import CenterCard from './CenterCard'
 
-function BudgetCard({ amt, max }) {
+function BudgetCard({ name, amt, max }) {
     return (
         <CenterCard>
-            <div className=' container sm:max-w-xl border-grey border-2 p-2.5 '>
+            <div className=' container sm:max-w-xl border-grey border-2 p-2.5 my-2'>
                 <div className='flex'>
                     <div className='flex justify-around gap-x-8 min-[450px]:gap-x-20 sm:gap-x-40 '>
                         <h1 className='text-black text-lg sm:text-xl md:text-2xl font-semibold'>
-                            Entertainment
+                            {name}
                         </h1>
                         <div className='flex justify-between gap-1.5 '>
                             <span className='text-black text-lg sm:text-xl md:text-2xl '>

@@ -1,16 +1,23 @@
 import './App.css'
-import AddBudgetModal from './Components/AddBudgetModal'
 import BudgetCard from './Components/BudgetCard'
-import CenterCard from './Components/CenterCard'
 import Navbar from './Components/Navbar'
+import { useBudget } from './Contexts/BudgetContext'
 
 function App() {
-
+  const { budgets, getBudgetExpenses } = useBudget()
   return (
     <div className="App">
       <Navbar />
-      <BudgetCard amt={1200} max={10000} />
-      <AddBudgetModal />
+      <div className='flex flex-col'>
+        {budgets.map((budget) => {
+          const amount = getBudgetExpenses(budget.id).reduce((total, expense) => total + expense.amount, 0)
+          return (
+            <BudgetCard name={budget.name} amt={amount} max={budget.max} />
+          )
+        })}
+      </div>
+
+
 
     </div >
   )

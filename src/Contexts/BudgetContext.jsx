@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { v4 as uuidv4 } from "uuid"
 import useLocalStorage from "../Hooks/useLocalStorage"
 
@@ -33,6 +33,7 @@ export const BudgetProvider = ({ children }) => {
     }
 
     function addBudget({ name, max }) {
+        console.log("inside context")
         setBudgets(prevBudget => {
             if (prevBudget.find(budget => budget.name == name)) return prevBudget
             return [...prevBudget, { id: uuidv4(), name, max }]
