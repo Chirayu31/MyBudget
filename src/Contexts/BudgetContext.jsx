@@ -28,9 +28,9 @@ export const BudgetProvider = ({ children }) => {
         return expenses.filter(expense => expense.budgetId === budgetId)
     }
 
-    function addExpense({ budgetId, name, amount, description }) {
+    function addExpense({ budgetId, amount, description }) {
         setExpenses(prevExpense => {
-            return [...prevExpense, { id: uuidv4(), budgetId, name, amount, description }]
+            return [...prevExpense, { id: uuidv4(), budgetId, amount, description }]
         })
     }
 

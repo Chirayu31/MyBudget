@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import BudgetCard from './Components/BudgetCard'
 import Navbar from './Components/Navbar'
+import TotalBudgetCard from './Components/TotalBudgetCard'
 import UncategorizedBudgetCard from './Components/UncategorizedBudgetCard'
 import { useBudget } from './Contexts/BudgetContext'
 
@@ -42,7 +43,8 @@ function App() {
             />
           )
         })}
-        <UncategorizedBudgetCard />
+        <UncategorizedBudgetCard onAddExpenseClick={expenseModalOpenHandler} />
+        <TotalBudgetCard />
       </div>
 
     </div >

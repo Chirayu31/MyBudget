@@ -2,7 +2,7 @@ import React from 'react'
 import { currencyFormatter } from '../utils'
 import CenterCard from './CenterCard'
 
-function BudgetCard({ name, amt, max, onAddExpenseClick }) {
+function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons }) {
     return (
         <CenterCard>
             <div className=' container sm:max-w-xl border-grey border-2 p-2.5 my-2'>
@@ -34,16 +34,20 @@ function BudgetCard({ name, amt, max, onAddExpenseClick }) {
                     </div>
                 </div>)}
                 {/* Add Expense and View Expense Buttons */}
-                <div className='flex justify-center'>
-                    <div className='flex justify-between gap-4 sm:gap-16'>
-                        <button className='bg-blue-600 p-1 sm:p-2 text-white text-sm sm:text-lg md:text-xl ' onClick={onAddExpenseClick}>
-                            Add Expense
-                        </button>
-                        <button className='bg-white border-solid border-2 border-grey hover:border-blue-600 p-1 sm:p-2 text-blue-600 text-sm sm:text-lg md:text-xl sm:mr-6 md:mr-10'>
-                            View Expenses
-                        </button>
-                    </div>
-                </div>
+                {!hideButtons &&
+                    (
+                        <div className='flex justify-center'>
+                            <div className='flex justify-between gap-4 sm:gap-16'>
+                                <button className='bg-blue-600 p-1 sm:p-2 text-white text-sm sm:text-lg md:text-xl ' onClick={onAddExpenseClick}>
+                                    Add Expense
+                                </button>
+                                <button className='bg-white border-solid border-2 border-grey hover:border-blue-600 p-1 sm:p-2 text-blue-600 text-sm sm:text-lg md:text-xl sm:mr-6 md:mr-10'>
+                                    View Expenses
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
 
             </div>
         </CenterCard>
