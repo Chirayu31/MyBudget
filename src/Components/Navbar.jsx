@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AddBudgetModal from './AddBudgetModal'
 import AddExpensesModal from './AddExpensesModal'
 
-function Navbar({ showExpenseModal, expenseModalOpenHandler, expenseModalCloseHandler, addExpenseModalBudgetId, setAddExpenseModalBudgetId }) {
+function Navbar({ showExpenseModal, expenseModalOpenHandler, expenseModalCloseHandler, addExpenseModalBudgetId }) {
     const [showBudgetModal, setShowBudgetModal] = useState(false)
 
     const budgetModalOpenHandler = () => {
@@ -16,7 +16,7 @@ function Navbar({ showExpenseModal, expenseModalOpenHandler, expenseModalCloseHa
             <div className='container mx-auto '>
                 <div className='flex justify-between gap-2 mx-2 py-2'>
                     <h1 className='text-black text-xl sm:text-2xl md:text-3xl font-semibold md:pl-8'>
-                        Budget
+                        MyBudget
                     </h1>
                     <div className='flex justify-between gap-4 sm:gap-16'>
                         <button

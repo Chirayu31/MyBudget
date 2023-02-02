@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { UNCATEGORIZED_BUDGET_ID, useBudget } from '../Contexts/BudgetContext'
 import CenterCard from './CenterCard'
 
@@ -7,17 +7,26 @@ function AddExpensesModal({ showExpenseModal, expenseModalCloseHandler, defaultB
     const amountRef = useRef()
     const budgetIdRef = useRef()
 
+    const [descError, setDescError] = useState(false);
+    const [amtError, setAmtError] = useState(false);
+
     const { addExpense, budgets } = useBudget()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log("inside handler")
-        addExpense({
-            description: descriptionRef.current.value,
-            amount: parseFloat(amountRef.current.value),
-            budgetId: budgetIdRef.current.value
-        })
-        expenseModalCloseHandler()
+        if (descriptionRef.current.value && amountRef.current.value) {
+            addExpense({
+                description: descriptionRef.current.value,
+                amount: parseFloat(amountRef.current.value),
+                budgetId: budgetIdRef.current.value
+            })
+            expenseModalCloseHandler()
+        } else {
+            if (!descriptionRef.current.value) setDescError(true)
+            if (!amountRef.current.value) setAmtError(true)
+
+        }
     }
 
     return (
@@ -38,6 +47,9 @@ function AddExpensesModal({ showExpenseModal, expenseModalCloseHandler, defaultB
                             <span
                                 className='text-lg font-medium'>
                                 Expense Description
+                                {descError && <span className='text-sm text-red-500'>
+                                    &nbsp; Description Cannot Be Empty
+                                </span>}
                             </span>
                             <input type="text"
                                 className='block w-3/4 h-10 px-2 border-b-2 border-black focus:outline-none focus:border-blue-600 focus:border-2 focus:rounded  '
@@ -48,6 +60,9 @@ function AddExpensesModal({ showExpenseModal, expenseModalCloseHandler, defaultB
                             <span
                                 className='text-lg font-medium'>
                                 Expense Amount
+                                {amtError && <span className='text-sm text-red-500'>
+                                    &nbsp; Amount Cannot Be Empty
+                                </span>}
                             </span>
                             <input type="number"
                                 className='block w-3/4 h-10 px-2 border-b-2 border-black focus:outline-none focus:border-blue-600 focus:border-2 focus:rounded  '

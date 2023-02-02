@@ -1,21 +1,31 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useBudget } from '../Contexts/BudgetContext'
 import CenterCard from './CenterCard'
 
 function AddBudgetModal({ showBudgetModal, budgetModalCloseHandler }) {
     const nameRef = useRef()
     const maxRef = useRef()
-
+    const [nameError, setNameError] = useState(false);
+    const [maxError, setMaxError] = useState(false);
     const { addBudget } = useBudget()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("inside handler")
-        addBudget({
-            name: nameRef.current.value,
-            max: parseFloat(maxRef.current.value)
-        })
-        budgetModalCloseHandler()
+        // console.log("inside handler")
+        if (nameRef.current.value && maxRef.current.value) {
+            addBudget({
+                name: nameRef.current.value,
+                max: parseFloat(maxRef.current.value)
+            })
+            budgetModalCloseHandler()
+        } else {
+            if (!nameRef.current.value) {
+                setNameError(true)
+            }
+            if (!maxRef.current.value) {
+                setMaxError(true)
+            }
+        }
     }
 
     return (
@@ -34,15 +44,22 @@ function AddBudgetModal({ showBudgetModal, budgetModalCloseHandler }) {
                             <span
                                 className='text-lg font-medium'>
                                 Budget Name
+                                {nameError && <span className='text-sm text-red-500'>
+                                    &nbsp; Name Cannot Be Empty
+                                </span>}
                             </span>
+
                             <input type="text"
-                                className='block w-3/4 h-10 px-2 border-b-2 border-black focus:outline-none focus:border-blue-600 focus:border-2 focus:rounded  '
+                                className={`block w-3/4 h-10 px-2 border-b-2 border-black focus:outline-none focus:border-blue-600 focus:border-2 focus:rounded`}
                                 placeholder='Enter Budget Name'
                                 ref={nameRef}
                             />
                             <span
                                 className='text-lg font-medium'>
                                 Budget Amount
+                                {maxError && <span className='text-sm text-red-500'>
+                                    &nbsp; Amount Cannot Be Empty
+                                </span>}
                             </span>
                             <input type="number"
                                 className='block w-3/4 h-10 px-2 border-b-2 border-black focus:outline-none focus:border-blue-600 focus:border-2 focus:rounded  '
@@ -71,10 +88,7 @@ function AddBudgetModal({ showBudgetModal, budgetModalCloseHandler }) {
                                     Close
                                 </button>
                             </div>
-
-
                         </form>
-
                     </div>
                 </CenterCard>
 
