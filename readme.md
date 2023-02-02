@@ -12,3 +12,4 @@ A budget management application built with Tailwind CSS, Vite + React. This app 
 - Ability to set and track budget goals.
 - Context API for handling CRUD operations.
 
+[Live Preview](https://mybudget31.netlify.app)
