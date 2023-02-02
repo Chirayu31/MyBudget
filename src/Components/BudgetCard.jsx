@@ -1,8 +1,8 @@
 import React from 'react'
 import { currencyFormatter } from '../utils'
 import CenterCard from './CenterCard'
+function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons, onViewExpensesClick }) {
 
-function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons }) {
     return (
         <CenterCard>
             <div className=' container sm:max-w-xl border-grey border-2 p-2.5 my-2'>
@@ -15,7 +15,7 @@ function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons }) {
                             <span className='text-black text-lg sm:text-xl md:text-2xl '>
                                 {currencyFormatter.format(amt)}
                             </span>
-                            {max && <span className='text-black text-md sm:text-lg md:text-xl mt-1'>
+                            {max > 0 && <span className='text-black text-md sm:text-lg md:text-xl mt-1'>
                                 / {currencyFormatter.format(max)}
                             </span>}
 
@@ -23,7 +23,7 @@ function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons }) {
                     </div>
                 </div>
                 {/* Progress bar */}
-                {max && (<div className='flex my-5'>
+                {max > 0 && (<div className='flex my-5'>
                     <div className='w-full bg-gray-300 rounded-full h-5'>
                         <div className={`w-full rounded-full h-5
                      ${amt / max > 0.75 ? `bg-red-500`
@@ -41,14 +41,12 @@ function BudgetCard({ name, amt, max, onAddExpenseClick, hideButtons }) {
                                 <button className='bg-blue-600 p-1 sm:p-2 text-white text-sm sm:text-lg md:text-xl ' onClick={onAddExpenseClick}>
                                     Add Expense
                                 </button>
-                                <button className='bg-white border-solid border-2 border-grey hover:border-blue-600 p-1 sm:p-2 text-blue-600 text-sm sm:text-lg md:text-xl sm:mr-6 md:mr-10'>
+                                <button className='bg-white border-solid border-2 border-grey hover:border-blue-600 p-1 sm:p-2 text-blue-600 text-sm sm:text-lg md:text-xl sm:mr-6 md:mr-10' onClick={onViewExpensesClick}>
                                     View Expenses
                                 </button>
                             </div>
                         </div>
                     )}
-
-
             </div>
         </CenterCard>
     )
