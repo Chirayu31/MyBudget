@@ -102,7 +102,7 @@ function AddExpensesModal({ showExpenseModal, expenseModalCloseHandler, defaultB
                                     className='bg-blue-600 p-1 sm:p-2 text-white text-sm sm:text-lg md:text-xl'
                                     onClick={handleSubmit}
                                 >
-                                    Add New Budget
+                                    Add New Expense
                                 </button>
 
                                 <button
